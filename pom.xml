@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.iisigroup</groupId>
-	<artifactId>wssamplch2</artifactId>
+	<artifactId>ch2HotelReservation</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>aar</packaging>
 
-	<name>wssamplch2</name>
+	<name>ch2HotelReservation</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
