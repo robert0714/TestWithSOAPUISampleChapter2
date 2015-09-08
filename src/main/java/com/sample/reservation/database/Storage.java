@@ -441,7 +441,7 @@ public class Storage {
     private Connection getConnection() throws StorageException {
         String driverName = "org.h2.Driver";
         String conectionURI = null;        
-        conectionURI = "jdbc:h2:~/HOTEL_RESERVATION_DB;INIT=RUNSCRIPT FROM 'dbscripts/HotelReservationDBSchema.sql'";
+        conectionURI = "jdbc:h2:~/HOTEL_RESERVATION_DB;INIT=RUNSCRIPT FROM 'classpath:dbscripts/HotelReservationDBSchema.sql'";
 
 
 
