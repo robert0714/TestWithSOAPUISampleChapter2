@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://sample.com/reservation/room/types" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns="http://sample.com/reservation/room" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax23="http://exception.reservation.sample.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://sample.com/reservation/room">
+    <wsdl:documentation>RoomManagementService</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax24="http://exception.reservation.sample.com/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://sample.com/reservation/room/types">
+            <xs:import namespace="http://exception.reservation.sample.com/xsd"/>
+            <xs:element name="RoomManagementServiceRoomManagementException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="RoomManagementException" nillable="true" type="ax23:RoomManagementException"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addRoom">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="roomNumber" type="xs:int"/>
+                        <xs:element minOccurs="0" name="roomType" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="roomSize" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addRoomResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteRoom">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="roomNumber" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getRoomDetails">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="roomNumber" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getRoomDetailsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ns:Room"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="Room">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="roomNumber" type="xs:int"/>
+                    <xs:element minOccurs="0" name="roomSize" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="roomType" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://exception.reservation.sample.com/xsd">
+            <xs:complexType name="RoomManagementException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="deleteRoomRequest">
+        <wsdl:part name="parameters" element="ns:deleteRoom"/>
+    </wsdl:message>
+    <wsdl:message name="RoomManagementServiceRoomManagementException">
+        <wsdl:part name="parameters" element="ns:RoomManagementServiceRoomManagementException"/>
+    </wsdl:message>
+    <wsdl:message name="getRoomDetailsRequest">
+        <wsdl:part name="parameters" element="ns:getRoomDetails"/>
+    </wsdl:message>
+    <wsdl:message name="getRoomDetailsResponse">
+        <wsdl:part name="parameters" element="ns:getRoomDetailsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addRoomRequest">
+        <wsdl:part name="parameters" element="ns:addRoom"/>
+    </wsdl:message>
+    <wsdl:message name="addRoomResponse">
+        <wsdl:part name="parameters" element="ns:addRoomResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="RoomManagementServicePortType">
+        <wsdl:operation name="deleteRoom">
+            <wsdl:input message="tns:deleteRoomRequest" wsaw:Action="urn:deleteRoom"/>
+            <wsdl:fault message="tns:RoomManagementServiceRoomManagementException" name="RoomManagementServiceRoomManagementException" wsaw:Action="urn:deleteRoomRoomManagementServiceRoomManagementException"/>
+        </wsdl:operation>
+        <wsdl:operation name="getRoomDetails">
+            <wsdl:input message="tns:getRoomDetailsRequest" wsaw:Action="urn:getRoomDetails"/>
+            <wsdl:output message="tns:getRoomDetailsResponse" wsaw:Action="urn:getRoomDetailsResponse"/>
+            <wsdl:fault message="tns:RoomManagementServiceRoomManagementException" name="RoomManagementServiceRoomManagementException" wsaw:Action="urn:getRoomDetailsRoomManagementServiceRoomManagementException"/>
+        </wsdl:operation>
+        <wsdl:operation name="addRoom">
+            <wsdl:input message="tns:addRoomRequest" wsaw:Action="urn:addRoom"/>
+            <wsdl:output message="tns:addRoomResponse" wsaw:Action="urn:addRoomResponse"/>
+            <wsdl:fault message="tns:RoomManagementServiceRoomManagementException" name="RoomManagementServiceRoomManagementException" wsaw:Action="urn:addRoomRoomManagementServiceRoomManagementException"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="RoomManagementServiceSoap11Binding" type="tns:RoomManagementServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="deleteRoom">
+            <soap:operation soapAction="urn:deleteRoom" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:fault name="RoomManagementServiceRoomManagementException">
+                <soap:fault use="literal" name="RoomManagementServiceRoomManagementException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getRoomDetails">
+            <soap:operation soapAction="urn:getRoomDetails" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="RoomManagementServiceRoomManagementException">
+                <soap:fault use="literal" name="RoomManagementServiceRoomManagementException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="addRoom">
+            <soap:operation soapAction="urn:addRoom" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="RoomManagementServiceRoomManagementException">
+                <soap:fault use="literal" name="RoomManagementServiceRoomManagementException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="RoomManagementServiceSoap12Binding" type="tns:RoomManagementServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="deleteRoom">
+            <soap12:operation soapAction="urn:deleteRoom" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:fault name="RoomManagementServiceRoomManagementException">
+                <soap12:fault use="literal" name="RoomManagementServiceRoomManagementException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getRoomDetails">
+            <soap12:operation soapAction="urn:getRoomDetails" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="RoomManagementServiceRoomManagementException">
+                <soap12:fault use="literal" name="RoomManagementServiceRoomManagementException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="addRoom">
+            <soap12:operation soapAction="urn:addRoom" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="RoomManagementServiceRoomManagementException">
+                <soap12:fault use="literal" name="RoomManagementServiceRoomManagementException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="RoomManagementServiceHttpBinding" type="tns:RoomManagementServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="deleteRoom">
+            <http:operation location="deleteRoom"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="getRoomDetails">
+            <http:operation location="getRoomDetails"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addRoom">
+            <http:operation location="addRoom"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="RoomManagementService">
+        <wsdl:port name="RoomManagementServiceHttpSoap11Endpoint" binding="tns:RoomManagementServiceSoap11Binding">
+            <soap:address location="http://192.168.9.100:8080/axis2/services/RoomManagementService.RoomManagementServiceHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="RoomManagementServiceHttpSoap12Endpoint" binding="tns:RoomManagementServiceSoap12Binding">
+            <soap12:address location="http://192.168.9.100:8080/axis2/services/RoomManagementService.RoomManagementServiceHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="RoomManagementServiceHttpEndpoint" binding="tns:RoomManagementServiceHttpBinding">
+            <http:address location="http://192.168.9.100:8080/axis2/services/RoomManagementService.RoomManagementServiceHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
