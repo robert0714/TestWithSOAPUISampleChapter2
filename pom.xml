@@ -12,7 +12,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<h2.version>1.4.187</h2.version>
+		<h2.version>2.0.206</h2.version>
 		<mockito.version>1.9.5</mockito.version>
 		<junit.version>4.12</junit.version>
 		<axis2.version>1.6.3</axis2.version>
